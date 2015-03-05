@@ -1,0 +1,26 @@
+{
+  "name": "selenium-drivex",
+  "version": "1.0.0",
+  "description": "selenium-webdriver abstraction methods",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grawk/selenium-drivex"
+  },
+  "keywords": [
+    "selenium",
+    "webdriver"
+  ],
+  "author": "Matt Edelman",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "bugs": {
+    "url": "https://github.com/grawk/selenium-drivex/issues"
+  },
+  "homepage": "https://github.com/grawk/selenium-drivex",
+  "devDependencies": {
+    "selenium-webdriver": "^2.45.1"
+  }
+}
