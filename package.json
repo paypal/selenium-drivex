@@ -20,10 +20,8 @@
     "url": "https://github.com/grawk/selenium-drivex/issues"
   },
   "homepage": "https://github.com/grawk/selenium-drivex",
-  "devDependencies": {
-    "selenium-webdriver": "^2.45.1"
-  },
   "dependencies": {
-    "debug": "^2.1.2"
+    "debug": "^2.1.2",
+    "selenium-webdriver": "^2.45.1"
   }
 }
