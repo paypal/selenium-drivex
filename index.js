@@ -1,4 +1,5 @@
 var wd = require('selenium-webdriver');
+var debug = require('debug');
 var log = debug('selenium-drivex');
 
 
