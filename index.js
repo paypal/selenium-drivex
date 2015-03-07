@@ -1,9 +1,8 @@
-var wd = require('selenium-webdriver');
 var debug = require('debug');
 var log = debug('selenium-drivex');
 
 
-module.exports = function drivex(driver) {
+module.exports = function drivex(driver, wd) {
   var methods = {
     find: function (locator, el) {
       return (el ? el : driver).findElement(locator);
