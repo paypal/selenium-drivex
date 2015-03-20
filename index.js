@@ -53,6 +53,31 @@ module.exports = function drivex(driver, wd) {
         log(err.stack);
         throw new Error(msg || '[drivex.waitForElement] Element not locatable');
       });
+    },
+    /**
+     * Wait for timeout milliseconds for the WebElement to be visible
+     * @param locator {LocatorJSON}
+     * @param timeout {Number}
+     * @param msg {String} optional message for any error messages
+     * @returns {Promise} resolves to true or throw error
+     */
+    waitForElementVisible: function (locator, timeout, msg) {
+
+      log('waitForElementVisible', locator);
+      return driver.wait(function() {
+        return methods.present(locator);
+      }, timeout, msg).then(function() {
+        driver.wait(function() {
+          return methods.visible(locator);
+        }, timeout, msg)
+      }).then(function(isVisible) {
+        log('waitForElementVisible: ' + isVisible, locator);
+        return isVisible;
+      }, function(err) {
+        log('waitForElementVisible', err);
+        log(err.stack);
+        throw new Error(msg || '[drivex.waitForElementVisible] Element not visible');
+      });
     }
   };
   return methods;

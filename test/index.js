@@ -14,5 +14,6 @@ var drivex = Drivex(driver, webdriver);
 driver.get('http://www.google.com/ncr');
 drivex.find(by({'locator': 'q', 'type': 'name'})).sendKeys('webdriver');
 drivex.find(by({'locator': 'btnG', 'type': 'name'})).click();
-driver.wait(until.titleIs('webdriver - Google Search'), 1000).then(function() {console.log('received correct page title')});
+drivex.waitForElementVisible(by({'locator': 'Selenium WebDriver', 'type': 'linkText'}), 6000, 'didnt find it');
+//driver.wait(until.titleIs('webdriver - Google Search'), 1000).then(function() {console.log('received correct page title')});
 driver.quit();
