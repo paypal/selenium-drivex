@@ -11,7 +11,7 @@ module.exports = function drivex(driver, wd) {
      * wraps Selenium WebDriver/WebElement.findElements
      * @param locator {LocatorJSON}
      * @param el {WebElement}
-     * @returns {Promise} resolves to an array of WebElements or rejected
+     * @returns {Promise} resolves to an array of WebElements or []
      */
     finds: function (locator, el) {
       return (el ? el : driver).findElements(locator);
@@ -47,7 +47,7 @@ module.exports = function drivex(driver, wd) {
       log('waitForElement', locator);
       return driver.wait(wd.until.elementLocated(locator), timeout, msg).then(function() {
         log('waitForElement: found', locator);
-        return true;
+        return methods.find(locator);
       }, function(err) {
         log('waitForElement', err);
         log(err.stack);
@@ -72,7 +72,7 @@ module.exports = function drivex(driver, wd) {
         }, timeout, msg)
       }).then(function(isVisible) {
         log('waitForElementVisible: ' + isVisible, locator);
-        return isVisible;
+        return methods.find(locator);
       }, function(err) {
         log('waitForElementVisible', err);
         log(err.stack);

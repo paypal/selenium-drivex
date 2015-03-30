@@ -22,5 +22,8 @@
   "homepage": "https://github.com/grawk/selenium-drivex",
   "dependencies": {
     "debug": "^2.1.2"
+  },
+  "devDependencies": {
+    "selenium-webdriver": "~2.44.0"
   }
 }
