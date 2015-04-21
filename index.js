@@ -165,6 +165,34 @@ module.exports = function drivex(driver, wd) {
       }, function (err) {
         throw new Error(err);
       });
+    },
+    /**
+     *
+     * @param locatorObject {'key1': LocatorObj, 'key2': LocatorObj, ...}
+     * @param timeout (optional)
+     * @returns {*}
+     */
+    firstVisible: function (locatorObject, timeout) {
+      var keyFound;
+      var elementTests = [];
+      Object.keys(locatorObject).forEach(function(key) {
+        var loc = locatorObject[key];
+        elementTests.push(function() {
+          return methods.waitForElementVisible(loc, 100).then(function() {
+            keyFound = key;
+            return true;
+          }, function(err) {
+            return false;
+          });
+        });
+      });
+      return driver.wait(function() {
+        var elementTest = elementTests.shift();
+        elementTests.push(elementTest);
+        return elementTest();
+      }, timeout || 5000).then(function() {
+        return keyFound;
+      });
     }
   };
   return methods;

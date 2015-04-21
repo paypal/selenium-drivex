@@ -12,7 +12,7 @@ function by(locator) {
 }
 var drivex = Drivex(driver, webdriver);
 driver.get('http://www.google.com/ncr');
-drivex.visible(by({'locator': 'blerg', 'type': 'css'}));
+//drivex.visible(by({'locator': 'blerg', 'type': 'css'}));
 drivex.find(by({'locator': 'q', 'type': 'name'})).sendKeys('webdriver');
 drivex.find(by({'locator': 'btnG', 'type': 'name'})).click();
 drivex.waitForElementVisible(by({'locator': 'Selenium WebDriver', 'type': 'linkText'}), 6000, 'didnt find it');
