@@ -109,6 +109,13 @@ module.exports = function drivex(driver, wd) {
       var wep = new wd.WebElementPromise(driver, waitVisibleReturnElement());
       return wep;
     },
+    /**
+     *
+     * @param locator MUST resolve to a SELECT element
+     * @param optionText option text to select
+     * @param parentWebElement (optional)
+     * @returns {Promise} resolves to a WebeElement.click() (which resolves itself to a Promise
+     */
     selectByOptionText: function (locator, optionText, parentWebElement) {
       var d = wd.promise.defer();
       methods.find(locator, parentWebElement).then(function (selectEl) {
@@ -140,6 +147,24 @@ module.exports = function drivex(driver, wd) {
         });
       });
       return d;
+    },
+    /**
+     *
+     * @param locator MUST resolve to a SELECT element
+     * @param optionValue option attribute value to select
+     * @param parentWebElement (optional)
+     * @returns {Promise} resolves to a WebeElement.click() (which resolves itself to a Promise
+     */
+    selectByOptionValue: function (locator, optionValue, parentWebElement) {
+      return methods.find(locator, parentWebElement).then(function (selectEl) {
+        return selectEl.findElement(wd.By.css('option[value=\'' + optionValue + '\']')).then(function (element) {
+          return element.click();
+        }, function (err) {
+          throw new Error(err);
+        });
+      }, function (err) {
+        throw new Error(err);
+      });
     }
   };
   return methods;
