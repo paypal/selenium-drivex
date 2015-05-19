@@ -193,6 +193,39 @@ module.exports = function drivex(driver, wd) {
       }, timeout || 5000).then(function() {
         return keyFound;
       });
+    },
+    /**
+     *validateText validates the text for a WebElement
+     * @param locator
+     * @param parentWebElement (optional)
+     * @param validate text is the expected text
+     * @returns {*}
+     */
+     validateText: function (locator, parentWebElement, validateText) {
+       return methods.find(locator, parentWebElement,validateText).getText().then(function (actual) {
+         if(actual === validateText){
+           return true;
+           } else {
+           return false;
+          }
+       });
+      },
+    /**
+     *validateAttributeValue validates the attribute for a WebElement
+     * @param locator
+     * @param parentWebElement (optional)
+     * @param attribute value
+     * @param validate text is the expected text
+     * @returns {*}
+     */
+    validateAttributeValue: function (locator, parentWebElement,attribute, validateText) {
+      return methods.find(locator, parentWebElement,validateText).getAttribute(attribute).then(function (actual) {
+        if(actual === validateText){
+          return true;
+          } else {
+          return false;
+        }
+      });
     }
   };
   return methods;
