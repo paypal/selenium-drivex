@@ -198,16 +198,16 @@ module.exports = function drivex(driver, wd) {
      *validateText validates the text for a WebElement
      * @param locator
      * @param parentWebElement (optional)
-     * @param validate text is the expected text
+     * @param expected text
      * @returns {*}
      */
-     validateText: function (locator, parentWebElement, validateText) {
-       return methods.find(locator, parentWebElement,validateText).getText().then(function (actual) {
-         if(actual === validateText){
-           return true;
-           } else {
-           return false;
-          }
+    validateText: function (locator, parentWebElement, expectedText) {
+      return methods.find(locator, parentWebElement,expectedText).getText().then(function (actual) {
+        if(actual === expectedText){
+          return true;
+          } else {
+          return false;
+        }
        });
       },
     /**
@@ -215,12 +215,12 @@ module.exports = function drivex(driver, wd) {
      * @param locator
      * @param parentWebElement (optional)
      * @param attribute value
-     * @param validate text is the expected text
+     * @param expected text
      * @returns {*}
      */
-    validateAttributeValue: function (locator, parentWebElement,attribute, validateText) {
-      return methods.find(locator, parentWebElement,validateText).getAttribute(attribute).then(function (actual) {
-        if(actual === validateText){
+    validateAttributeValue: function (locator, parentWebElement,attribute, expectedText) {
+      return methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
+        if(actual === expectedText){
           return true;
           } else {
           return false;

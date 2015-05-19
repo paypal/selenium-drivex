@@ -32,11 +32,11 @@ selenium-webdriver abstractions
 * `validateText` validates the text for a WebElement
   * `@argument locator {Locator}`
   * `@argument parentWebElement (optional)`
-  * `@argument validate text is the expected value`
+  * `@argument expected value
   * `@returns {*}`
 * `validateAttributeValue` validates the attribute value for a WebElement
   * `@argument locator {Locator}`
   * `@argument parentWebElement (optional)`
   * `@argument attribute value`
-  * `@argument validate text is the expected value`
+  * `@argument expected value
   * `@returns {*}`
