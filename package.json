@@ -15,6 +15,13 @@
     "webdriver"
   ],
   "author": "Matt Edelman",
+  "contributors": [{
+    "name": "Matt Edelman",
+    "email": "mattedelman@gmail.com"
+  }, {
+    "name": "Vidya Aravind",
+    "email": "vidyaravind@gmail.com"
+  }],
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "bugs": {
     "url": "https://github.com/grawk/selenium-drivex/issues"
