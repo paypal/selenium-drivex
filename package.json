@@ -1,6 +1,6 @@
 {
   "name": "selenium-drivex",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "selenium-webdriver abstraction methods",
   "main": "index.js",
   "scripts": {
@@ -15,13 +15,16 @@
     "webdriver"
   ],
   "author": "Matt Edelman",
-  "contributors": [{
-    "name": "Matt Edelman",
-    "email": "mattedelman@gmail.com"
-  }, {
-    "name": "Vidya Aravind",
-    "email": "vidyaravind@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Matt Edelman",
+      "email": "mattedelman@gmail.com"
+    },
+    {
+      "name": "Vidya Aravind",
+      "email": "vidyaravind@gmail.com"
+    }
+  ],
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "bugs": {
     "url": "https://github.com/grawk/selenium-drivex/issues"
