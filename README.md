@@ -33,10 +33,10 @@ selenium-webdriver abstractions
   * `@argument locator {Locator}`
   * `@argument parentWebElement (optional)`
   * `@argument expected value
-  * `@returns {*}`
+  * `@returns {WebElementPromise} resolves to true or throw error`
 * `validateAttributeValue` validates the attribute value for a WebElement
   * `@argument locator {Locator}`
   * `@argument parentWebElement (optional)`
   * `@argument attribute value`
   * `@argument expected value
-  * `@returns {*}`
+  * `@returns {WebElementPromise} resolves to true or throw error`

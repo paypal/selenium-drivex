@@ -199,33 +199,37 @@ module.exports = function drivex(driver, wd) {
      * @param locator
      * @param parentWebElement (optional)
      * @param expected text
-     * @returns {*}
+     * @returns {WebElementPromise} resolves to true or throw error
      */
     validateText: function (locator, parentWebElement, expectedText) {
-      return methods.find(locator, parentWebElement,expectedText).getText().then(function (actual) {
-        if(actual === expectedText){
-          return true;
-          } else {
-          return false;
+      var d = wd.promise.defer();
+      methods.find(locator, parentWebElement,expectedText).getText().then(function (actual){
+        if (actual === expectedText) {
+          d.fulfill(true);
+        } else {
+          d.reject(new Error('couldn\'t find text: ' + expectedText));
         }
-       });
-      },
+      });
+      return d;
+    },
     /**
      *validateAttributeValue validates the attribute for a WebElement
      * @param locator
      * @param parentWebElement (optional)
      * @param attribute value
      * @param expected text
-     * @returns {*}
+     * @returns {WebElementPromise} resolves to true or throw error
      */
     validateAttributeValue: function (locator, parentWebElement,attribute, expectedText) {
-      return methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
-        if(actual === expectedText){
-          return true;
-          } else {
-          return false;
+      var d = wd.promise.defer();
+      methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
+        if (actual === expectedText) {
+          d.fulfill(true);
+        } else {
+          d.reject(new Error('couldn\'t find text: ' + expectedText));
         }
       });
+      return d;
     }
   };
   return methods;
