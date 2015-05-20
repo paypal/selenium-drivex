@@ -29,3 +29,14 @@ selenium-webdriver abstractions
   * `@argument timeout {Number}`
   * `@argument msg {String} (optional)`
   * `@returns {Promise}` resolves to WebElement or rejected
+* `validateText` validates the text for a WebElement
+  * `@argument locator {Locator}`
+  * `@argument parentWebElement (optional)`
+  * `@argument expected value
+  * `@returns {Promise}`resolves to true or rejected
+* `validateAttributeValue` validates the attribute value for a WebElement
+  * `@argument locator {Locator}`
+  * `@argument parentWebElement (optional)`
+  * `@argument attribute value`
+  * `@argument expected value
+  * `@returns {Promise}`resolves to true or rejected
