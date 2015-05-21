@@ -103,7 +103,7 @@ module.exports = function drivex(driver, wd) {
      */
     waitForElementVisiblePromise: function (locator, timeout, msg) {
       function waitVisibleReturnElement() {
-        return methods.waitForElementVisible(locator, timeout || 5000);
+        return methods.waitForElementVisible(locator, timeout || 5000, msg);
       }
 
       var wep = new wd.WebElementPromise(driver, waitVisibleReturnElement());
