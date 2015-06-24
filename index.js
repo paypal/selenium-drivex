@@ -204,6 +204,7 @@ module.exports = function drivex(driver, wd) {
     validateText: function (locator, parentWebElement, expectedText) {
       var d = wd.promise.defer();
       methods.find(locator, parentWebElement,expectedText).getText().then(function (actual){
+        log('validateText : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
           d.fulfill(true);
         } else {
@@ -223,6 +224,7 @@ module.exports = function drivex(driver, wd) {
     validateAttributeValue: function (locator, parentWebElement,attribute, expectedText) {
       var d = wd.promise.defer();
       methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
+        log('validateAttributeValue : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
           d.fulfill(true);
         } else {
