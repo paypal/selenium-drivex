@@ -14,7 +14,7 @@ module.exports = function drivex(driver, wd) {
      * @returns {Promise} resolves to an array of WebElements or []
      */
     finds: function (locator, el) {
-      return (el ? el : driver).findElements(locator);
+      return (el || driver).findElements(locator);
     },
     /**
      * wraps Selenium WebDriver/WebElement.isElementPresent
