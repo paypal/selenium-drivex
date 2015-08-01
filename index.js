@@ -139,6 +139,7 @@ module.exports = function drivex(driver, wd) {
             function (err) {
               if (found !== false) {
                 d.fulfill(found.click());
+
               } else {
                 d.reject(new Error('couldn\'t find option with text: ' + optionText));
               }
@@ -202,16 +203,14 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to true or throw error
      */
     validateText: function (locator, parentWebElement, expectedText) {
-      var d = wd.promise.defer();
-      methods.find(locator, parentWebElement,expectedText).getText().then(function (actual){
+      return methods.find(locator, parentWebElement,expectedText).getText().then(function (actual){
         log('validateText : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
-          d.fulfill(true);
+          return true;
         } else {
-          d.reject(new Error('couldn\'t find text: ' + expectedText));
+          throw new Error('couldn\'t find text: ' + expectedText);
         }
       });
-      return d;
     },
     /**
      *validateAttributeValue validates the attribute for a WebElement
@@ -222,16 +221,14 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to true or throw error
      */
     validateAttributeValue: function (locator, parentWebElement,attribute, expectedText) {
-      var d = wd.promise.defer();
-      methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
+      return methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
         log('validateAttributeValue : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
-          d.fulfill(true);
+          return true;
         } else {
-          d.reject(new Error('couldn\'t find text: ' + expectedText));
+          throw new Error('couldn\'t find text: ' + expectedText);
         }
       });
-      return d;
     }
   };
   return methods;
