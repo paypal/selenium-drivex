@@ -12,12 +12,12 @@ function by(locator) {
 }
 var drivex = Drivex(driver, webdriver);
 driver.get('http://www.google.com/ncr');
-//drivex.visible(by({'locator': 'blerg', 'type': 'css'}));
-/* drivex.waitTextExists(by({'locator': 'pocs2', 'type': 'id'})); */
-// drivex.find(by({'locator': 'q', 'type': 'name'})).sendKeys('webdriver');
-// drivex.find(by({'locator': 'btnG', 'type': 'name'})).click();
-/* drivex.waitForElementVisible(by({'locator': 'Selenium WebDriver', 'type': 'linkText'}), 6000, 'didnt find it'); */
-drivex.validateText(by({'locator': 'pocs2', 'type': 'id'}), undefined, 'Please Enter to search.');
+drivex.find(by({'locator': 'pocs2', 'type': 'id'})).click();
+drivex.visible(by({'locator': 'pocs2', 'type': 'id'}));
+drivex.validateText(by({'locator': 'pocs2', 'type': 'id'}), null, 'Please Enter to search.');
+drivex.firstVisible(by({'locator': 'pocs2', 'type': 'id'}));
+drivex.find(by({'locator': 'q', 'type': 'name'})).sendKeys('webdriver');
 drivex.find(by({'locator': 'btnG', 'type': 'name'})).click();
-//driver.wait(until.titleIs('webdriver - Google Search'), 1000).then(function() {console.log('received correct page title')});
+/* drivex.waitForElementVisible(by({'locator': 'Selenium WebDriver', 'type': 'linkText'}), 6000, 'didnt find it'); */
+driver.wait(until.titleIs('webdriver - Google Search'), 1000).then(function() {console.log('received correct page title')});
 driver.quit();
