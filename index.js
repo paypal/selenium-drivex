@@ -203,7 +203,7 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to true or throw error
      */
     validateText: function (locator, parentWebElement, expectedText) {
-      return methods.find(locator, parentWebElement,expectedText).getText().then(function (actual){
+      return methods.find(locator, parentWebElement).getText().then(function (actual){
         log('validateText : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
           return true;
@@ -221,7 +221,7 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to true or throw error
      */
     validateAttributeValue: function (locator, parentWebElement,attribute, expectedText) {
-      return methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
+      return methods.find(locator, parentWebElement).getAttribute(attribute).then(function (actual) {
         log('validateAttributeValue : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
           return true;
