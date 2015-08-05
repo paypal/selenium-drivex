@@ -119,7 +119,7 @@ module.exports = function drivex(driver, wd) {
     selectByOptionText: function (locator, optionText, parentWebElement) {
       var d = wd.promise.defer();
       methods.find(locator, parentWebElement).then(function (selectEl) {
-        selectEl.findElements(wd.By.css('option')).then(function (elts) {
+        finds(wd.By.css('option'), selectEl).then(function (elts) {
           var current = 0;
           var total = elts.length;
           var found = false;
