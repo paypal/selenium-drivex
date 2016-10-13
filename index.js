@@ -14,7 +14,7 @@ module.exports = function drivex(driver, wd) {
      * @returns {Promise} resolves to an array of WebElements or []
      */
     finds: function (locator, el) {
-      return (el ? el : driver).findElements(locator);
+      return (el || driver).findElements(locator);
     },
     /**
      * wraps Selenium WebDriver/WebElement.isElementPresent
@@ -119,7 +119,7 @@ module.exports = function drivex(driver, wd) {
     selectByOptionText: function (locator, optionText, parentWebElement) {
       var d = wd.promise.defer();
       methods.find(locator, parentWebElement).then(function (selectEl) {
-        selectEl.findElements(wd.By.css('option')).then(function (elts) {
+        finds(wd.By.css('option'), selectEl).then(function (elts) {
           var current = 0;
           var total = elts.length;
           var found = false;
@@ -139,6 +139,7 @@ module.exports = function drivex(driver, wd) {
             function (err) {
               if (found !== false) {
                 d.fulfill(found.click());
+
               } else {
                 d.reject(new Error('couldn\'t find option with text: ' + optionText));
               }
@@ -202,16 +203,14 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to true or throw error
      */
     validateText: function (locator, parentWebElement, expectedText) {
-      var d = wd.promise.defer();
-      methods.find(locator, parentWebElement,expectedText).getText().then(function (actual){
+      return methods.find(locator, parentWebElement).getText().then(function (actual){
         log('validateText : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
-          d.fulfill(true);
+          return true;
         } else {
-          d.reject(new Error('couldn\'t find text: ' + expectedText));
+          throw new Error('couldn\'t find text: ' + expectedText);
         }
       });
-      return d;
     },
     /**
      *validateAttributeValue validates the attribute for a WebElement
@@ -222,16 +221,14 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to true or throw error
      */
     validateAttributeValue: function (locator, parentWebElement,attribute, expectedText) {
-      var d = wd.promise.defer();
-      methods.find(locator, parentWebElement,expectedText).getAttribute(attribute).then(function (actual) {
+      return methods.find(locator, parentWebElement).getAttribute(attribute).then(function (actual) {
         log('validateAttributeValue : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
-          d.fulfill(true);
+          return true;
         } else {
-          d.reject(new Error('couldn\'t find text: ' + expectedText));
+          throw new Error('couldn\'t find text: ' + expectedText);
         }
       });
-      return d;
     }
   };
   return methods;
