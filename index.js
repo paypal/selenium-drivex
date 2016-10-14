@@ -140,7 +140,7 @@ module.exports = function drivex(driver, wd) {
               if (found !== false) {
                 d.fulfill(found.click());
               } else {
-                d.reject(new Error('[driverx.selectByOptionText] couldn\'t find option with text: ' + JSON.stringify(optionText) + ' for locator ' + showLocator(locator)));
+                d.reject(new Error('[drivex.selectByOptionText] couldn\'t find option with text: ' + JSON.stringify(optionText) + ' for locator ' + showLocator(locator)));
               }
             }
           );
