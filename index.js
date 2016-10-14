@@ -51,7 +51,7 @@ module.exports = function drivex(driver, wd) {
       }, function (err) {
         log('waitForElement', err);
         log(err.stack);
-        throw new Error(msg || '[drivex.waitForElement] Element not locatable');
+        throw new Error(msg || '[drivex.waitForElement] Element not locatable for locator ' + showLocator(locator));
       });
     },
     /**
@@ -140,7 +140,7 @@ module.exports = function drivex(driver, wd) {
               if (found !== false) {
                 d.fulfill(found.click());
               } else {
-                d.reject(new Error('couldn\'t find option with text: ' + optionText));
+                d.reject(new Error('[driverx.selectByOptionText] couldn\'t find option with text: ' + JSON.stringify(optionText) + ' for locator ' + showLocator(locator)));
               }
             }
           );
@@ -208,7 +208,7 @@ module.exports = function drivex(driver, wd) {
         if (actual === expectedText) {
           d.fulfill(true);
         } else {
-          d.reject(new Error('couldn\'t find text: ' + expectedText));
+          d.reject(new Error('[drivex.validateText] couldn\'t find text: ' + JSON.stringify(expectedText) + ' for locator ' + showLocator(locator)));
         }
       });
       return d;
@@ -228,7 +228,7 @@ module.exports = function drivex(driver, wd) {
         if (actual === expectedText) {
           d.fulfill(true);
         } else {
-          d.reject(new Error('couldn\'t find text: ' + expectedText));
+          d.reject(new Error('[drivex.validateAttributeValue] couldn\'t find value ' + JSON.stringify(expectedText) + ' for locator ' + showLocator(locator) + ' and attribute ' + JSON.stringify(attribute)));
         }
       });
       return d;
