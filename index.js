@@ -91,7 +91,7 @@ module.exports = function drivex(driver, wd) {
       }, function (err) {
         log('waitForElementVisible', err);
         log(err.stack);
-        throw new Error(msg || '[drivex.waitForElementVisible] Element not visible');
+        throw new Error(msg || '[drivex.waitForElementVisible] Element not visible: ' + showLocator(locator));
       });
     },
     /**
@@ -236,3 +236,11 @@ module.exports = function drivex(driver, wd) {
   };
   return methods;
 };
+
+function showLocator(locator) {
+  if (locator instanceof Function) {
+    return "[Function]";
+  } else {
+    return JSON.stringify(locator)
+  }
+}
