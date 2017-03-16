@@ -17,13 +17,15 @@ module.exports = function drivex(driver, wd) {
       return (el ? el : driver).findElements(locator);
     },
     /**
-     * wraps Selenium WebDriver/WebElement.isElementPresent
+     * wraps Selenium WebDriver/WebElement.findElements
      * @param locator {LocatorJSON}
      * @param el {WebElement}
-     * @returns {Promise} resolves to true or rejected
+     * @returns {Promise} resolves to true or false
      */
     present: function (locator, el) {
-      return (el ? el : driver).isElementPresent(locator);
+      return (el ? el : driver).findElements(locator).then(function (elts) {
+        return elts.length > 0
+      });
     },
     /**
      * wraps Selenium WebElement.isVisible

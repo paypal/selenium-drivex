@@ -1,6 +1,6 @@
 {
   "name": "selenium-drivex",
-  "version": "1.0.14",
+  "version": "2.0.0-alpha.1",
   "description": "selenium-webdriver abstraction methods",
   "main": "index.js",
   "scripts": {
@@ -39,6 +39,6 @@
     "debug": "^2.1.2"
   },
   "devDependencies": {
-    "selenium-webdriver": "~2.44.0"
+    "selenium-webdriver": "^3"
   }
 }
