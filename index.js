@@ -81,12 +81,14 @@ module.exports = function drivex(driver, wd) {
     waitForElementVisible: function (locator, timeout, msg) {
 
       log('waitForElementVisible', locator);
-      return driver.wait(function () {
-        return methods.present(locator);
-      }, timeout, msg).then(function () {
-        driver.wait(function () {
-          return methods.visible(locator);
-        }, timeout, msg)
+      return driver.sleep(10).then(function () {
+          return driver.wait(function () {
+              return methods.present(locator);
+          }, timeout, msg).then(function () {
+              driver.wait(function () {
+                  return methods.visible(locator);
+              }, timeout, msg)
+          })
       }).then(function (isVisible) {
         log('waitForElementVisible: ' + isVisible, locator);
         return methods.find(locator);
@@ -148,7 +150,7 @@ module.exports = function drivex(driver, wd) {
           );
         });
       });
-      return d;
+      return d.promise;
     },
     /**
      *
@@ -213,7 +215,7 @@ module.exports = function drivex(driver, wd) {
           d.reject(new Error('[drivex.validateText] couldn\'t find text: ' + JSON.stringify(expectedText) + ' for locator ' + showLocator(locator)));
         }
       });
-      return d;
+      return d.promise;
     },
     /**
      *validateAttributeValue validates the attribute for a WebElement
@@ -233,7 +235,7 @@ module.exports = function drivex(driver, wd) {
           d.reject(new Error('[drivex.validateAttributeValue] couldn\'t find value ' + JSON.stringify(expectedText) + ' for locator ' + showLocator(locator) + ' and attribute ' + JSON.stringify(attribute)));
         }
       });
-      return d;
+      return d.promise;
     }
   };
   return methods;
