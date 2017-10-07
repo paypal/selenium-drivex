@@ -20,6 +20,7 @@ function p(wd) {
 module.exports = function drivex(driver, wd) {
   var methods = {
     find: function (locator, el) {
+      log('finds:start %s', locator);
       return (el ? el : driver).findElement(locator);
     },
     /**
@@ -29,6 +30,7 @@ module.exports = function drivex(driver, wd) {
      * @returns {Promise} resolves to an array of WebElements or []
      */
     finds: function (locator, el) {
+      log('finds:start %s', locator);
       return (el ? el : driver).findElements(locator);
     },
     /**
@@ -39,10 +41,8 @@ module.exports = function drivex(driver, wd) {
      */
     present: function (locator, el) {
       log('present:start %s', locator);
-
       return (el ? el : driver).findElements(locator).then(function (elts) {
         log('present:success %s', locator);
-
         return elts.length > 0
       });
     },
@@ -54,10 +54,8 @@ module.exports = function drivex(driver, wd) {
      */
     visible: function (locator, el) {
       log('visible:start %s', locator);
-
       return methods.find(locator, el).then(function (elt) {
         log('visible:success %s', locator);
-
         return elt.isDisplayed();
       });
     },
@@ -87,7 +85,9 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to WebElement or throw error
      */
     waitForElementPromise: function (locator, timeout, msg) {
+      log('waitForElementPromise:start %s', locator);
       function waitReturnElement() {
+        log('waitForElementPromise>waitReturnElement:start %s', locator);
         return methods.waitForElement(locator, timeout || 5000, msg);
       }
 

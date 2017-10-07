@@ -1,7 +1,7 @@
 'use strict';
 var Drivex = require('../');
 var webdriver = require('selenium-webdriver');
-const {Builder, By, Key, promise, until} = require('selenium-webdriver');
+const {Builder, By, promise} = require('selenium-webdriver');
 
 promise.USE_PROMISE_MANAGER = false;
 
@@ -13,7 +13,6 @@ function by(locator) {
   let driver = await new Builder().forBrowser('phantomjs').build();
   let drivex = Drivex(driver, webdriver);
   await driver.get('http://www.google.com/ncr');
-//drivex.visible(by({'locator': 'blerg', 'type': 'css'}));
   await drivex.waitForElementVisiblePromise(by({'locator': 'q', 'type': 'name'})).sendKeys('webdriver');
   await drivex.waitForElementVisiblePromise(by({'locator': 'lsb', 'type': 'className'})).click().catch(async (err) => {
     await driver.quit();
@@ -36,7 +35,6 @@ function by(locator) {
     console.log('shouldnt have gone to the error handler');
     throw err;
   });
-//driver.wait(until.titleIs('webdriver - Google Search'), 1000).then(function() {console.log('received correct page title')});
   await driver.quit();
 })();
 
