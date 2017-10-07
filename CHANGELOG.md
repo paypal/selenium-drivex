@@ -5,6 +5,7 @@
 - disable promise manager for tests
 - resolve broken waitForElement promise chain
 - improve logging
+- add conditional use of node.js promise if present
 
 ## v2.0.0
 
