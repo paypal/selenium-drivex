@@ -130,7 +130,9 @@ module.exports = function drivex(driver, wd) {
      * @returns {WebElementPromise} resolves to WebElement or throw error
      */
     waitForElementVisiblePromise: function (locator, timeout, msg) {
+      log('waitForElementVisiblePromise:start %s', locator);
       function waitVisibleReturnElement() {
+        log('waitForElementVisiblePromise>waitVisibleReturnElement:start %s', locator);
         return methods.waitForElementVisible(locator, timeout || 5000, msg);
       }
 
@@ -146,6 +148,7 @@ module.exports = function drivex(driver, wd) {
      */
     selectByOptionText: function (locator, optionText, parentWebElement) {
       var d = p(wd);
+      log('selectByOptionText:start, locator:%s, text: %s', locator, optionText);
       methods.find(locator, parentWebElement).then(function (selectEl) {
         selectEl.findElements(wd.By.css('option')).then(function (elts) {
           var current = 0;
@@ -184,6 +187,7 @@ module.exports = function drivex(driver, wd) {
      * @returns {Promise} resolves to a WebeElement.click() (which resolves itself to a Promise
      */
     selectByOptionValue: function (locator, optionValue, parentWebElement) {
+      log('selectByOptionValue:start, locator:%s, value: %s', locator, optionValue);
       return methods.find(locator, parentWebElement).then(function (selectEl) {
         return selectEl.findElement(wd.By.css('option[value=\'' + optionValue + '\']')).then(function (element) {
           return element.click();
@@ -203,6 +207,7 @@ module.exports = function drivex(driver, wd) {
     firstVisible: function (locatorObject, timeout) {
       var keyFound;
       var elementTests = [];
+      log('firstVisible:start, locatorObject:%o', locatorObject);
       Object.keys(locatorObject).forEach(function (key) {
         var loc = locatorObject[key];
         elementTests.push(function () {
@@ -231,6 +236,7 @@ module.exports = function drivex(driver, wd) {
      */
     validateText: function (locator, parentWebElement, expectedText) {
       var d = p(wd);
+      log('validateText:start, locator: %s, text: %s', locator, expectedText);
       methods.find(locator, parentWebElement, expectedText).getText().then(function (actual) {
         log('validateText : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
@@ -251,6 +257,7 @@ module.exports = function drivex(driver, wd) {
      */
     validateAttributeValue: function (locator, parentWebElement, attribute, expectedText) {
       var d = p(wd);
+      log('validateAttributeValue:start, locator: %s, text: %s', locator, expectedText);
       methods.find(locator, parentWebElement, expectedText).getAttribute(attribute).then(function (actual) {
         log('validateAttributeValue : actual : ' + actual + ' expected : ' + expectedText);
         if (actual === expectedText) {
