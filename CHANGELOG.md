@@ -1,6 +1,6 @@
 # selenium-drivex changelog
 
-## Unreleased
+## v2.0.1
 
 - disable promise manager for tests
 - resolve broken waitForElement promise chain
