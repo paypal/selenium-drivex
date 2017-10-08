@@ -4,7 +4,8 @@
   "description": "selenium-webdriver abstraction methods",
   "main": "index.js",
   "scripts": {
-    "test": "node test/index.js"
+    "test:debug": "SELENIUM_PROMISE_MANAGER=0 DEBUG=selenium-drivex node --inspect --inspect-brk test/index.js",
+    "test": "SELENIUM_PROMISE_MANAGER=0 DEBUG=selenium-drivex node test/index.js"
   },
   "repository": {
     "type": "git",
