@@ -114,7 +114,7 @@ module.exports = function drivex(driver, wd) {
      * @param locator MUST resolve to a SELECT element
      * @param optionText option text to select
      * @param parentWebElement (optional)
-     * @returns {Promise} resolves to a WebeElement.click() (which resolves itself to a Promise
+     * @returns {Promise} resolves to a WebElement.click() (which resolves itself to a Promise)
      */
     selectByOptionText: function (locator, optionText, parentWebElement) {
       var d = wd.promise.defer();
@@ -153,7 +153,7 @@ module.exports = function drivex(driver, wd) {
      * @param locator MUST resolve to a SELECT element
      * @param optionValue option attribute value to select
      * @param parentWebElement (optional)
-     * @returns {Promise} resolves to a WebeElement.click() (which resolves itself to a Promise
+     * @returns {Promise} resolves to a WebElement.click() (which resolves itself to a Promise)
      */
     selectByOptionValue: function (locator, optionValue, parentWebElement) {
       return methods.find(locator, parentWebElement).then(function (selectEl) {

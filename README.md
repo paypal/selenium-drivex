@@ -29,14 +29,24 @@ selenium-webdriver abstractions
   * `@argument timeout {Number}`
   * `@argument msg {String} (optional)`
   * `@returns {Promise}` resolves to WebElement or rejected
+* `selectOptionByText`
+  * `@argument locator {Locator}` locator which must resolve to a select element
+  * `@argument optionText {String}` option text to select
+  * `@argument parentWebElement {WebElement} (optional)`
+  * `@returns {Promise}` resolves when the option is selected or reject if there is an error at selection
+* `selectOptionByValue`
+  * `@argument locator {Locator}` locator which must resolve to a select element
+  * `@argument optionValue {String}` option value to select
+  * `@argument parentWebElement {WebElement} (optional)`
+  * `@returns {Promise}` resolves when the option is selected or reject if there is an error at selection
 * `validateText` validates the text for a WebElement
   * `@argument locator {Locator}`
   * `@argument parentWebElement (optional)`
-  * `@argument expected value
+  * `@argument text {String}` expected text
   * `@returns {Promise}`resolves to true or rejected
 * `validateAttributeValue` validates the attribute value for a WebElement
   * `@argument locator {Locator}`
   * `@argument parentWebElement (optional)`
   * `@argument attribute value`
-  * `@argument expected value
+  * `@argument value {String}` expected value
   * `@returns {Promise}`resolves to true or rejected
