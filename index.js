@@ -36,6 +36,19 @@ module.exports = function drivex(driver, wd) {
         return elt.isDisplayed();
       });
     },
+    dragDrop: function (sourceLocator, targetLocator) {
+      log('dragDrop from ', sourceLocator);
+      log('dragDrop to ', targetLocator);
+      return methods.find(sourceLocator).then(function (source) {
+        var target = methods.find(targetLocator);
+        driver.action().dragAndDrop(source, target).perform(); 
+        return true;
+      }).then(null, function (err) {
+        log('dragDrop', err);
+        log(err.stack);
+        throw new Error('[drivex.dragDop] Element not locatable');
+      })
+    },
     /**
      * Wait for timeout milliseconds for the WebElement to be present
      * @param locator {LocatorJSON}
@@ -108,6 +121,96 @@ module.exports = function drivex(driver, wd) {
 
       var wep = new wd.WebElementPromise(driver, waitVisibleReturnElement());
       return wep;
+    },
+    waitNotPresent: function (locator, timeout, msg) {
+      log('waitNotPresent', locator);
+      return driver.wait(wd.until.elementLocated(locator), timeout || 5000, msg)
+      .then(function () {
+        log('waitNotPresent', locator);
+        return methods.present(locator)
+      }).then(Promise.reject, Promise.resolve);
+    },
+    waitNotVisible: function (locator, timeout, msg) {
+      log('waitNotVisible', locator);
+      return driver.wait(wd.until.elementLocated(locator), timeout || 5000, msg)
+      .then(function () {
+        log('waitNotVisible', locator);
+        return methods.visible(locator)
+      }).then(Promise.reject, Promise.resolve);
+    },
+    waitTextExists: function (locator, timeout, msg) {
+      log('waitTextExists', locator);
+      return driver.wait(wd.until.elementLocated(locator), timeout || 5000, msg)
+      .then(function () {
+        return methods.find(locator).getText();
+      }).then(function (txt) {
+        if (txt.length > 0) {
+          return true;
+        } else {
+          throw new Error('couldn\'t find if text exists.');
+        }
+      }).then(null, function (err) {
+        log('waitTextExists', err);
+        log(err.stack);
+        throw new Error(msg || '[drivex.waitTextExists] Element not locatable');
+      });
+    },
+    waitTextEqual: function (locator, expectedText, timeout, msg) {
+      log('waitTextEqual', locator);
+      return driver.wait(wd.until.elementLocated(locator), timeout || 5000, msg)
+      .then(function () {
+        return methods.find(locator).getText();
+      })
+      .then(function (actual) {
+        log('waitTextEqual : actual : ' + actual + 'expected : ' + expectedText);
+        if (actual == expectedText) {
+          return true;
+        } else {
+          throw new Error('couldn\'t find text: ' + expectedText);
+        }
+      }).then(null, function (err) {
+        log('waitTextEqual', err);
+        log(err.stack);
+        throw new Error(msg || '[drivex.waitTextEqual] Element not locatable');
+      });
+    },
+    waitTextNotEqual: function (locator, expectedText, timeout, msg) {
+      log('waitTextNotEqual', locator);
+      return driver.wait(wd.until.elementLocated(locator), timeout || 5000, msg)
+      .then(function () {
+        return methods.find(locator).getText();
+      })
+      .then(function (actual) {
+        log('waitTextNotEqual : actual : ' + actual + 'expected : ' + expectedText);
+        if (actual != expectedValue) {
+          return true;
+        } else {
+          new Error('Element has text with content : ' + expectedValue);
+        }
+      }).then(null, function (err) {
+        log('waitTextNotEqual', err);
+        log(err.stack);
+        throw new Error(msg || '[drivex.waitTextNotEqual] Element not locatable');
+      });
+    },
+    waitAttributeEqual: function(locator, attribute, expectedValue, timeout, msg) {
+      log('waitAttributeEqual', locator);
+      return driver.wait(wd.until.elementLocated(locator), timeout || 5000, msg)
+      .then(function () {
+        return methods.find(locator).getAttribute(attribute);
+      })
+      .then(function (actual) {
+        log('validateAttributeValue : actual : ' + actual + ' expected : ' + expectedValue);
+        if (actual == expectedValue) {
+          return true;
+        } else {
+          throw new Error('couldn\t find attribute with value: ' + expectedValue);
+        }
+      }).then(null, function (err) {
+        log('waitAttributeEqual', err);
+        log(err.stack);
+        throw new Error(msg || '[drivex.waitAttributeEqual] Element not locatable');
+      });
     },
     /**
      *
